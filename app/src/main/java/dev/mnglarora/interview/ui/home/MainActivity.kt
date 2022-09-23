@@ -1,7 +1,8 @@
 package dev.mnglarora.interview.ui.home
 
-import android.os.Build
+
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.databinding.DataBindingUtil
@@ -15,6 +16,7 @@ import dev.mnglarora.interview.ui.adapter.GithubRepoAdapter
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
+
 class MainActivity : ComponentActivity() {
 
     private val binding: ActivityMainBinding by lazy {
@@ -22,9 +24,15 @@ class MainActivity : ComponentActivity() {
     }
     private val viewModel: MainViewModel by lazy { getViewModel() }
     private val mAdapter: GithubRepoAdapter = GithubRepoAdapter()
-    private var mListState: Int? = null
+    //private var mListState: Int? = null
 
     private lateinit var layoutManager: LinearLayoutManager
+
+
+    private val KEY_RECYCLER_STATE = "recycler_state"
+    private var mBundleRecyclerViewState: Bundle? = null
+    private var mListState: Parcelable? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,12 +91,11 @@ class MainActivity : ComponentActivity() {
         super.onSaveInstanceState(state)
 
         // Save list state
-        val mListState =
-            (binding.recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
-        state.putInt("LIST_STATE_KEY", mListState)
+        viewModel.parcelable = binding.recyclerView.layoutManager?.onSaveInstanceState()
+        //state.putParcelable("LIST_STATE_KEY", mListState)
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+/*    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         // Retrieve list state and list/item positions
         mListState = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -96,16 +103,46 @@ class MainActivity : ComponentActivity() {
         } else {
             savedInstanceState.getInt("LIST_STATE_KEY", 0)
         }
-    }
+    }*/
 
+
+/*    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        mListState = savedInstanceState.getParcelable("LIST_STATE_KEY")
+    }*/
+
+
+    /*  override fun onPause() {
+          super.onPause()
+          mBundleRecyclerViewState = Bundle()
+          mListState = binding.recyclerView.layoutManager?.onSaveInstanceState()
+          mBundleRecyclerViewState?.putParcelable(KEY_RECYCLER_STATE, mListState)
+      }*/
 
     override fun onResume() {
         super.onResume()
         mListState?.let {
-            Log.e("Resumed", "Activity Is Resumed")
-            binding.recyclerView.scrollToPosition(it)
+            Log.e("Resumed", "Activity Is Resumed $it")
+            binding.recyclerView.layoutManager?.onRestoreInstanceState(viewModel.parcelable)
+            // layoutManager.smoothScrollToPosition(binding.recyclerView, RecyclerView.State(), it)
         }
     }
+
+/*
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+
+        if (mBundleRecyclerViewState != null) {
+            Handler(Looper.myLooper()!!).postDelayed({
+                mListState = mBundleRecyclerViewState!!.getParcelable(KEY_RECYCLER_STATE)
+                binding.recyclerView.layoutManager?.onRestoreInstanceState(mListState)
+            }, 50)
+        }
+
+    }*/
+
+
+    //Adding to Manifest is must for orientation changes and saved instance state works
 
 
 }

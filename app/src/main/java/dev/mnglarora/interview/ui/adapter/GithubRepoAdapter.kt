@@ -66,8 +66,6 @@ class GithubRepoAdapter : ListAdapter<GhRepo, GithubRepoAdapter.ListViewHolder>(
         holder.bind(position)
     }
 
-
-
     class DiffUtilsImpl : DiffUtil.ItemCallback<GhRepo>() {
         override fun areItemsTheSame(oldItem: GhRepo, newItem: GhRepo): Boolean =
             oldItem.id == newItem.id

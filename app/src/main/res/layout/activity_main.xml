@@ -27,7 +27,7 @@
             android:drawableEnd="@drawable/search"
             android:drawablePadding="8dp"
             android:elevation="2dp"
-            android:hint="Search Repository, Owner name"
+            android:hint="@string/search_repository_owner_name"
             android:importantForAutofill="no"
             android:afterTextChanged="@{(str) -> adapter.search(str)}"
             android:inputType="text"
@@ -41,6 +41,7 @@
             android:clipToPadding="false"
             android:paddingBottom="120dp"
             app:adapter="@{adapter}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
