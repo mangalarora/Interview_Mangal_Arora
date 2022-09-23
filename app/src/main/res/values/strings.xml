@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Interview_Mangal_Arora</string>
+    <string name="database">AppDatabase</string>
+    <string name="sync_notification_title">Syncing Data</string>
+    <string name="sync_notification_channel_description">Sync Notification Channel</string>
+    <string name="sync_notification_channel_name">SyncNotification</string>
+</resources>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
+    <application
+        android:name=".LKInterviewApp"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Interview_Mangal_Arora"
+        tools:targetApi="33">
+        <activity
+            android:name=".ui.home.MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.Interview_Mangal_Arora">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="dev.mnglarora.interview.androidx-startup"
+            android:exported="false"
+            tools:node="merge">
+            <!-- If you are using androidx.startup to initialize other components -->
+            <meta-data
+                android:name="androidx.work.WorkManagerInitializer"
+                android:value="androidx.startup"
+                tools:node="remove" />
+            <!--  TODO: b/2173216 Disable auto sync startup till it works well with instrumented tests   -->
+            <meta-data
+                android:name="dev.mnglarora.interview.sync.initializers.SyncInitializer"
+                android:value="androidx.startup"
+                tools:node="remove" />
+        </provider>
+
+
+
+
+  <!--      <provider
+            android:name="androidx.work.impl.WorkManagerInitializer"
+            android:authorities="dev.mnglarora.interview.workmanager-init"
+            tools:node="remove" />-->
+
+        <service
+            android:name="androidx.work.impl.foreground.SystemForegroundService"
+            tools:node="merge" />
+
+    </application>
+
+</manifest>

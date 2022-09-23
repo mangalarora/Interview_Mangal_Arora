@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="dev.mnglarora.interview.model.GhRepo" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
+        android:theme="@style/Theme.MaterialComponents"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp">
+
+        <LinearLayout
+            android:id="@+id/item"
+            android:layout_width="match_parent"
+            android:layout_height="92dp"
+            android:background="@color/white"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="horizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_launcher_foreground"
+                app:civ_border_color="#AF7F7F7F"
+                app:civ_border_width="2dp"
+                app:loadImage="@{model.owner.avatar_url}" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@{model.owner.login +`/`+ model.name}"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:minLines="2"
+                    android:text="@{model.description}"
+                    android:textColor="#555555"
+                    android:textSize="14sp" />
+
+
+                <!-- <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="3dp"
+                     android:orientation="horizontal">
+
+                     <TextView
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_marginEnd="8dp"
+                         android:layout_weight="1"
+                         android:drawableStart="@drawable/language"
+                         android:drawablePadding="6dp"
+                         android:ellipsize="end"
+                         android:maxLines="1"
+                         android:text="@{model.language}"
+                         android:textColor="#388E3C"
+                         android:textSize="14sp"
+                         app:drawableStartCompat="@drawable/language" />
+
+                     <TextView
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_marginEnd="8dp"
+                         android:layout_weight="1"
+                         android:drawableStart="@drawable/star"
+                         android:drawablePadding="6dp"
+                         android:ellipsize="end"
+                         android:maxLines="1"
+                         android:text="@{model.stargazers_count+``}"
+                         android:textColor="#303F9F"
+                         android:textSize="14sp"
+                         app:drawableStartCompat="@drawable/star" />
+
+                     <TextView
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_marginEnd="8dp"
+                         android:layout_weight="1"
+                         android:drawableStart="@drawable/repository"
+                         android:drawablePadding="6dp"
+                         android:ellipsize="end"
+                         android:maxLines="1"
+                         android:text="@{model.forks_count+``}"
+                         android:textColor="#0097A7"
+                         android:textSize="14sp"
+                         app:drawableStartCompat="@drawable/repository" />
+
+                     <TextView
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_marginEnd="8dp"
+                         android:layout_weight="1"
+                         android:drawableStart="@drawable/bug"
+                         android:drawablePadding="6dp"
+                         android:ellipsize="end"
+                         android:maxLines="1"
+                         android:text="@{model.open_issues_count+``}"
+                         android:textColor="#E64A19"
+                         android:textSize="14sp"
+                         app:drawableStartCompat="@drawable/bug" />
+                 </LinearLayout>-->
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="4"
+                    android:rowCount="1">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:drawableStart="@drawable/language"
+                        android:drawablePadding="6dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:paddingEnd="8dp"
+                        android:text="@{model.language}"
+                        android:textColor="#388E3C"
+                        android:textSize="14sp"
+                        app:drawableStartCompat="@drawable/language" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:drawableStart="@drawable/star"
+                        android:drawablePadding="6dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:paddingEnd="8dp"
+                        android:text="@{model.stargazers_count+``}"
+                        android:textColor="#303F9F"
+                        android:textSize="14sp"
+                        app:drawableStartCompat="@drawable/star" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:drawableStart="@drawable/repository"
+                        android:drawablePadding="6dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:paddingEnd="8dp"
+                        android:text="@{model.forks_count+``}"
+                        android:textColor="#0097A7"
+                        android:textSize="14sp"
+                        app:drawableStartCompat="@drawable/repository" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:drawableStart="@drawable/bug"
+                        android:drawablePadding="6dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:paddingEnd="8dp"
+                        android:text="@{model.open_issues_count+``}"
+                        android:textColor="#E64A19"
+                        android:textSize="14sp"
+                        app:drawableStartCompat="@drawable/bug" />
+                </GridLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</layout>
