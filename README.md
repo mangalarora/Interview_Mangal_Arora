@@ -8,5 +8,6 @@ Best Practices
   - STATE FLOW
   - ROOM WITH FLOW
   - KTOR CLIENT FOR API CALLING
+  - Sealed Class for API Response Handling
   - KOIN
   - KOTLINX-SERIALIZATION
