@@ -1,6 +1,7 @@
 package dev.mnglarora.interview
 
 import android.app.Application
+import androidx.appcompat.app.AppCompatDelegate
 import dev.mnglarora.interview.di.*
 import dev.mnglarora.interview.sync.initializer.Sync
 import org.koin.android.ext.koin.androidContext
@@ -23,6 +24,7 @@ class LKInterviewApp : Application(), KoinComponent {
             modules(workerModule)
         }
         Sync.initialize(context = this)
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
     }
 
 }

@@ -2,6 +2,7 @@ package dev.mnglarora.interview.ui.adapter
 
 import android.text.Editable
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.compose.ui.unit.dp
@@ -13,17 +14,14 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.mnglarora.interview.R
 import dev.mnglarora.interview.databinding.ListItemBinding
 import dev.mnglarora.interview.model.GhRepo
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 
 class GithubRepoAdapter : ListAdapter<GhRepo, GithubRepoAdapter.ListViewHolder>(DiffUtilsImpl()) {
 
 
     private lateinit var kFunction: (Int) -> Unit
     private lateinit var selectedListFlow: StateFlow<ArrayList<Int>>
-    private val _mutableStateFlow: MutableStateFlow<List<GhRepo>> = MutableStateFlow(arrayListOf())
-    private val repoStateFlow = _mutableStateFlow.asStateFlow()
+    private var mutableRepoListSF: List<GhRepo> = listOf()
 
     fun search(str: Editable?) {
         str?.toString()?.let { finalString ->
@@ -32,7 +30,7 @@ class GithubRepoAdapter : ListAdapter<GhRepo, GithubRepoAdapter.ListViewHolder>(
     }
 
     private fun search(str: String) {
-        submitList(repoStateFlow.value.filter {
+        submitList(mutableRepoListSF.filter {
             it.name?.contains(str, true) ?: false ||
                     it.owner?.login?.contains(str, true) ?: false
         }.sortedBy { it.rank })
@@ -44,7 +42,7 @@ class GithubRepoAdapter : ListAdapter<GhRepo, GithubRepoAdapter.ListViewHolder>(
     }
 
     fun updateData(sortedList: List<GhRepo>, searchText: String) {
-        _mutableStateFlow.value = sortedList
+        mutableRepoListSF = sortedList
         if (!TextUtils.isEmpty(searchText))
             search(searchText)
         else
@@ -63,7 +61,7 @@ class GithubRepoAdapter : ListAdapter<GhRepo, GithubRepoAdapter.ListViewHolder>(
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        holder.bind(position)
+        holder.bind()
     }
 
     class DiffUtilsImpl : DiffUtil.ItemCallback<GhRepo>() {
@@ -76,29 +74,35 @@ class GithubRepoAdapter : ListAdapter<GhRepo, GithubRepoAdapter.ListViewHolder>(
 
     inner class ListViewHolder(private val binding: ListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(position: Int) {
+
+        fun bind() {
+            val obj = getItem(absoluteAdapterPosition)
             binding.apply {
-                val obj = getItem(position)
-                val id = obj.id
                 model = obj
-                item.setOnClickListener {
-                    kFunction(id)
-                    notifyItemChanged(position)
-                }
-                if (selectedListFlow.value.contains(id)) {
-                    profileImage.borderWidth = 12.dp.value.toInt()
-                    profileImage.borderColor =
-                        ContextCompat.getColor(itemView.context, R.color.purple_200)
-                } else {
-                    profileImage.borderWidth = 2.dp.value.toInt()
-                    profileImage.borderColor =
-                        ContextCompat.getColor(
-                            itemView.context,
-                            org.koin.android.R.color.material_blue_grey_800
-                        )
-                }
+                populateView(obj.id)
+            }
+            binding.item.setOnClickListener {
+                Log.e("Item", "Clicked $position ${obj.name}")
+                kFunction(obj.id)
+                notifyItemChanged(absoluteAdapterPosition)
             }
         }
+
+        private fun ListItemBinding.populateView(id: Int) {
+            if (selectedListFlow.value.contains(id)) {
+                profileImage.borderWidth = 12.dp.value.toInt()
+                profileImage.borderColor =
+                    ContextCompat.getColor(itemView.context, android.R.color.holo_blue_dark)
+            } else {
+                profileImage.borderWidth = 2.dp.value.toInt()
+                profileImage.borderColor =
+                    ContextCompat.getColor(
+                        itemView.context,
+                        android.R.color.darker_gray
+                    )
+            }
+        }
+
     }
 
 

@@ -9,9 +9,7 @@ import androidx.work.WorkManagerInitializer
 import dev.mnglarora.interview.sync.worker.SyncWorker
 
 object Sync {
-    // This method is a workaround to manually initialize the sync process instead of relying on
-    // automatic initialization with Androidx Startup. It is called from the app module's
-    // Application.onCreate() and should be only done once.
+
     fun initialize(context: Context) {
         AppInitializer.getInstance(context)
             .initializeComponent(SyncInitializer::class.java)

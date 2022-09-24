@@ -3,11 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
-        <variable
-            name="vm"
-            type="dev.mnglarora.interview.ui.home.MainViewModel" />
-
         <variable
             name="adapter"
             type="dev.mnglarora.interview.ui.adapter.GithubRepoAdapter" />
@@ -41,9 +36,6 @@
             android:clipToPadding="false"
             android:paddingBottom="120dp"
             app:adapter="@{adapter}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
     </LinearLayout>
 </layout>

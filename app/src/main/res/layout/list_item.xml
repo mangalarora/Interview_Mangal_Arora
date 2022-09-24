@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="model"
             type="dev.mnglarora.interview.model.GhRepo" />
@@ -20,7 +19,7 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="2dp">
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/item"
             android:layout_width="match_parent"
             android:layout_height="92dp"
@@ -40,7 +39,7 @@
                 app:civ_border_width="2dp"
                 app:loadImage="@{model.owner.avatar_url}" />
 
-            <LinearLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -69,81 +68,16 @@
                     android:textColor="#555555"
                     android:textSize="14sp" />
 
-
-                <!-- <LinearLayout
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:layout_marginTop="3dp"
-                     android:orientation="horizontal">
-
-                     <TextView
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:layout_marginEnd="8dp"
-                         android:layout_weight="1"
-                         android:drawableStart="@drawable/language"
-                         android:drawablePadding="6dp"
-                         android:ellipsize="end"
-                         android:maxLines="1"
-                         android:text="@{model.language}"
-                         android:textColor="#388E3C"
-                         android:textSize="14sp"
-                         app:drawableStartCompat="@drawable/language" />
-
-                     <TextView
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:layout_marginEnd="8dp"
-                         android:layout_weight="1"
-                         android:drawableStart="@drawable/star"
-                         android:drawablePadding="6dp"
-                         android:ellipsize="end"
-                         android:maxLines="1"
-                         android:text="@{model.stargazers_count+``}"
-                         android:textColor="#303F9F"
-                         android:textSize="14sp"
-                         app:drawableStartCompat="@drawable/star" />
-
-                     <TextView
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:layout_marginEnd="8dp"
-                         android:layout_weight="1"
-                         android:drawableStart="@drawable/repository"
-                         android:drawablePadding="6dp"
-                         android:ellipsize="end"
-                         android:maxLines="1"
-                         android:text="@{model.forks_count+``}"
-                         android:textColor="#0097A7"
-                         android:textSize="14sp"
-                         app:drawableStartCompat="@drawable/repository" />
-
-                     <TextView
-                         android:layout_width="match_parent"
-                         android:layout_height="wrap_content"
-                         android:layout_marginEnd="8dp"
-                         android:layout_weight="1"
-                         android:drawableStart="@drawable/bug"
-                         android:drawablePadding="6dp"
-                         android:ellipsize="end"
-                         android:maxLines="1"
-                         android:text="@{model.open_issues_count+``}"
-                         android:textColor="#E64A19"
-                         android:textSize="14sp"
-                         app:drawableStartCompat="@drawable/bug" />
-                 </LinearLayout>-->
-
-                <GridLayout
+                <com.google.android.material.circularreveal.CircularRevealGridLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:columnCount="4"
                     android:rowCount="1">
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
-                        android:drawableStart="@drawable/language"
                         android:drawablePadding="6dp"
                         android:ellipsize="end"
                         android:maxLines="1"
@@ -153,11 +87,10 @@
                         android:textSize="14sp"
                         app:drawableStartCompat="@drawable/language" />
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
-                        android:drawableStart="@drawable/star"
                         android:drawablePadding="6dp"
                         android:ellipsize="end"
                         android:maxLines="1"
@@ -167,11 +100,10 @@
                         android:textSize="14sp"
                         app:drawableStartCompat="@drawable/star" />
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
-                        android:drawableStart="@drawable/repository"
                         android:drawablePadding="6dp"
                         android:ellipsize="end"
                         android:maxLines="1"
@@ -181,11 +113,10 @@
                         android:textSize="14sp"
                         app:drawableStartCompat="@drawable/repository" />
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
-                        android:drawableStart="@drawable/bug"
                         android:drawablePadding="6dp"
                         android:ellipsize="end"
                         android:maxLines="1"
@@ -194,12 +125,12 @@
                         android:textColor="#E64A19"
                         android:textSize="14sp"
                         app:drawableStartCompat="@drawable/bug" />
-                </GridLayout>
+                </com.google.android.material.circularreveal.CircularRevealGridLayout>
 
-            </LinearLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </com.google.android.material.card.MaterialCardView>
 

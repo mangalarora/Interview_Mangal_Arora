@@ -39,11 +39,10 @@ class SyncWorker(
 
         while (true) {
 
-            Log.e("Worker", "Running")
-
+            //Write All The Errors to Logs or Firebase Crashlytics
             when (val resp = mainRepo.getRepos()) {
                 is ApiResponse.Failure -> {
-                    Log.e("Worker", resp.message)
+
                 }
                 is ApiResponse.HttpErrors.BadGateWay -> {
 
@@ -67,10 +66,9 @@ class SyncWorker(
 
                 }
                 is ApiResponse.NetworkException -> {
-                    Log.e("Worker", resp.error?.localizedMessage ?: "")
+
                 }
                 is ApiResponse.Success -> {
-                    Log.e("Worker", "Success")
                     try {
                         val finalList = arrayListOf<Int>()
                         finalList.addAll(list)
