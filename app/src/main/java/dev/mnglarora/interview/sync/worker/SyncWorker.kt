@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.work.*
 import dev.mnglarora.interview.network.utils.ApiResponse
 import dev.mnglarora.interview.repository.MainRepository
+import dev.mnglarora.interview.sync.utils.initNetworkMonitoring
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -26,6 +27,7 @@ class SyncWorker(
     override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
 
         var list: List<Int> = arrayListOf()
+
 
         launch {
             mainRepo.getLocalRepos().collect { ghRepoList ->

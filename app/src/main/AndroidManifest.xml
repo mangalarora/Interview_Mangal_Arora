@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 
     <application
         android:name=".LKInterviewApp"
@@ -17,9 +18,9 @@
         tools:targetApi="33">
         <activity
             android:name=".ui.home.MainActivity"
+            android:configChanges="orientation|screenSize"
             android:exported="true"
             android:label="@string/app_name"
-            android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.Interview_Mangal_Arora">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,12 +51,10 @@
         </provider>
 
 
-
-
-  <!--      <provider
-            android:name="androidx.work.impl.WorkManagerInitializer"
-            android:authorities="dev.mnglarora.interview.workmanager-init"
-            tools:node="remove" />-->
+        <!--      <provider
+                  android:name="androidx.work.impl.WorkManagerInitializer"
+                  android:authorities="dev.mnglarora.interview.workmanager-init"
+                  tools:node="remove" />-->
 
         <service
             android:name="androidx.work.impl.foreground.SystemForegroundService"
