@@ -1,7 +1,7 @@
 # Interview_Mangal_Arora
  
 Best Practices
-  -CLEAN ARCHITECTURE
+  --CLEAN ARCHITECTURE
   -SOLID PRINCIPLES
 -MVVM
 -DATA BINDING
